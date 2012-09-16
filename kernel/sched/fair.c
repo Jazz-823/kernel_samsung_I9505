@@ -2644,7 +2644,7 @@ static int select_idle_sibling(struct task_struct *p, int target)
 {
 	struct sched_domain *sd;
 	struct sched_group *sg;
-	int i = task_cpu(p);
+	int i;
 
 	if (idle_cpu(target))
 		return target;
@@ -2672,7 +2672,7 @@ static int select_idle_sibling(struct task_struct *p, int target)
 				goto next;
 
 			for_each_cpu(i, sched_group_cpus(sg)) {
-				if (i == target || !idle_cpu(i))
+				if (!idle_cpu(i))
 					goto next;
 			}
 
